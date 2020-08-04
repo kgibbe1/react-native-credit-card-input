@@ -62,7 +62,7 @@ export default class CreditCardInput extends Component {
     cardFontFamily: PropTypes.string,
     cardBrandIcons: PropTypes.object,
 
-    formHorizontal: Props.bool,
+    formHorizontal: PropTypes.bool,
 
     allowScroll: PropTypes.bool,
 
