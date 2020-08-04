@@ -16,9 +16,6 @@ import CCInput from "./CCInput";
 import { InjectedProps } from "./connectToState";
 
 const s = StyleSheet.create({
-  container: {
-    alignItems: "center",
-  },
   form: {
     marginTop: 20,
   },
@@ -27,6 +24,9 @@ const s = StyleSheet.create({
   },
   inputLabel: {
     fontWeight: "bold",
+  },
+  verticalInput: {
+    marginLeft: 20,
   },
   input: {
     height: 40,
@@ -177,16 +177,20 @@ export default class CreditCardInput extends Component {
           <View style={{flexDirection: 'row'}}>
             <CCInput {...this._inputProps("expiry")}
               keyboardType="numeric"
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
+              containerStyle={[s.inputContainer, (!formHorizontal ? s.verticalInput : {}), inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
             { requiresCVC &&
               <CCInput {...this._inputProps("cvc")}
                 keyboardType="numeric"
-                containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
+                containerStyle={[s.inputContainer,(!formHorizontal ? s.verticalInput : {}), inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
+              { !formHorizontal && requiresPostalCode &&
+                <CCInput {...this._inputProps("postalCode")}
+                  keyboardType="numeric"
+                  containerStyle={[s.inputContainer, (!formHorizontal ? s.verticalInput : {}), inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
           </View>
           { formHorizontal && requiresName &&
             <CCInput {...this._inputProps("name")}
               containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH }]} /> }
-          { requiresPostalCode &&
+          { formHorizontal && requiresPostalCode &&
             <CCInput {...this._inputProps("postalCode")}
               keyboardType="numeric"
               containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
