@@ -25,7 +25,7 @@ const s = StyleSheet.create({
   inputLabel: {
     fontWeight: "bold",
   },
-  verticalInput: {
+  cvcInput: {
     marginLeft: 20,
   },
   input: {
@@ -177,20 +177,16 @@ export default class CreditCardInput extends Component {
           <View style={{flexDirection: 'row'}}>
             <CCInput {...this._inputProps("expiry")}
               keyboardType="numeric"
-              containerStyle={[s.inputContainer, (!formHorizontal ? s.verticalInput : {}), inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
+              containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
             { requiresCVC &&
               <CCInput {...this._inputProps("cvc")}
                 keyboardType="numeric"
-                containerStyle={[s.inputContainer,(!formHorizontal ? s.verticalInput : {}), inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
-              { !formHorizontal && requiresPostalCode &&
-                <CCInput {...this._inputProps("postalCode")}
-                  keyboardType="numeric"
-                  containerStyle={[s.inputContainer, (!formHorizontal ? s.verticalInput : {}), inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
+                containerStyle={[s.inputContainer,(!formHorizontal ? s.cvcInput : {}), inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
           </View>
           { formHorizontal && requiresName &&
             <CCInput {...this._inputProps("name")}
               containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH }]} /> }
-          { formHorizontal && requiresPostalCode &&
+          { requiresPostalCode &&
             <CCInput {...this._inputProps("postalCode")}
               keyboardType="numeric"
               containerStyle={[s.inputContainer, inputContainerStyle, { width: POSTAL_CODE_INPUT_WIDTH }]} /> }
