@@ -103,10 +103,12 @@ export default class CreditCardInput extends Component {
     if (!field) return;
 
     const scrollResponder = this.refs.Form.getScrollResponder();
-    this.CreditCardInput.measure( (fx, fy, width, height, px, py) => {
+    if(this.props.formHorizontal){
+      this.CreditCardInput.measure( (fx, fy, width, height, px, py) => {
         scrollResponder.scrollTo({ x: Math.max(fx - PREVIOUS_FIELD_OFFSET, 0), animated: true });
         this.refs[field].focus();
       });
+    }
   }
 
   _inputProps = field => {
@@ -158,7 +160,7 @@ export default class CreditCardInput extends Component {
         <ScrollView ref="Form"
           horizontal={formHorizontal}
           keyboardShouldPersistTaps="always"
-          scrollEnabled={allowScroll}
+          scrollEnabled={allowScroll && formHorizontal}
           showsHorizontalScrollIndicator={false}
           style={s.form}>
           { !formHorizontal && requiresName &&
